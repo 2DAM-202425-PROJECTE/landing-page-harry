@@ -21,9 +21,15 @@
             color: #edf2f7; /* Color del text del mode fosc */
         }
         .light-mode {
-            background-color: #f0f4f8; /* Color de fons del mode clar */
-            color: #2d3748; /* Color del text del mode clar */
+            background-color: #ffffff; /* Color de fons del mode clar */
+            color: #1a202c; /* Color del text del mode clar */
             transition: background-color 0.3s, color 0.3s; /* Transicions suaus */
+        }
+        .light-mode header {
+            background-color: #a0d3ff; /* Lighter blue for the header in light mode */
+        }
+        .light-mode section {
+            background-color: #e0f0ff; /* Lighter blue for sections in light mode */
         }
         .light-mode h1, .light-mode h2, .light-mode h3 {
             color: #2b6cb0; /* Color de títols al mode clar */
@@ -51,6 +57,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: background-color 0.3s;
+            display: none; /* Amaga el botó inicialment */
         }
         .scroll-to-top:hover {
             background-color: #357ab8; /* Més fosc al passar el ratolí */
@@ -67,6 +74,12 @@
             const body = document.body;
             body.classList.toggle('dark-mode');
             body.classList.toggle('light-mode');
+            // If dark mode is active, remove light-mode
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('light-mode');
+            } else {
+                body.classList.add('light-mode');
+            }
         }
 
         function scrollToTop() {
@@ -90,141 +103,143 @@
                 closeMenu();
             }
         });
+
+        // Show the scroll-to-top button when scrolling
+        window.onscroll = function() {
+            const scrollToTopButton = document.querySelector('.scroll-to-top');
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                scrollToTopButton.style.display = "flex"; // Mostra el botó
+            } else {
+                scrollToTopButton.style.display = "none"; // Amaga el botó
+            }
+        };
     </script>
 </head>
 <body class="bg-gray-800 text-gray-200 dark-mode transition-colors duration-300">
-    <div class="flex justify-between p-4">
-        <h1 class="text-xl">Harry White</h1>
-        <button onclick="toggleMenu()" class="bg-black text-white rounded px-4 py-2 ml-auto toggle-button">Menú</button>
-    </div>
+<div class="flex justify-between p-4">
+    <h1 class="text-xl">Harry White</h1>
+    <button onclick="toggleMenu()" class="bg-black text-white rounded px-4 py-2 ml-auto toggle-button">Menú</button>
+</div>
 
-    <!-- Dropdown Menu -->
-    <div id="dropdown-menu" class="menu bg-blue-600 text-white p-4 absolute right-0 z-10">
-        <ul class="space-y-2">
-            <li><a href="#sobre-mi" class="hover:underline">Sobre Mi</a></li>
-            <li><a href="#informacio-personal" class="hover:underline">Informació Personal</a></li>
-            <li><a href="#idiomes" class="hover:underline">Idiomes</a></li>
-            <li><a href="#llenguatges" class="hover:underline">Llenguatges de Programació</a></li>
-            <li><a href="#projectes" class="hover:underline">Els Meus Projectes</a></li>
-            <li><a href="#contacte" class="hover:underline">Contacta'm</a></li>
-            <li><button onclick="toggleDarkMode()" class="hover:underline">Mode Clar/Fosc</button></li>
-        </ul>
-    </div>
+<!-- Dropdown Menu -->
+<div id="dropdown-menu" class="menu bg-blue-600 text-white p-4 absolute right-0 z-10">
+    <ul class="space-y-2">
+        <li><a href="#sobre-mi" class="hover:underline">Sobre Mi</a></li>
+        <li><a href="#informacio-personal" class="hover:underline">Informació Personal</a></li>
+        <li><a href="#idiomes" class="hover:underline">Idiomes</a></li>
+        <li><a href="#llenguatges" class="hover:underline">Llenguatges de Programació</a></li>
+        <li><a href="#projectes" class="hover:underline">Els Meus Projectes</a></li>
+        <li><a href="#contacte" class="hover:underline">Contacta'm</a></li>
+        <li><button onclick="toggleDarkMode()" class="hover:underline">Mode Clar/Fosc</button></li>
+    </ul>
+</div>
 
-    <header class="bg-blue-800 text-white text-center py-12 shadow-lg relative">
-        <h1 class="text-5xl font-extrabold animate__animated animate__fadeIn">Benvingut al meu landing page!</h1>
-        <h2 class="text-3xl mt-2 animate__animated animate__fadeIn">Sóc Harry White</h2>
-    </header>
+<header class="bg-gradient-to-r from-blue-600 to-blue-400 text-white text-center py-16 shadow-lg relative overflow-hidden">
+    <h1 class="text-6xl font-extrabold animate__animated animate__fadeIn animate__delay-1s transform hover:scale-105 transition duration-300">
+        Benvingut al meu landing page!
+    </h1>
+    <h2 class="text-4xl mt-4 animate__animated animate__fadeIn animate__delay-2s transform hover:scale-105 transition duration-300">
+        Sóc Harry White
+    </h2>
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-blue-400 to-transparent"></div>
+</header>
 
-    <div class="flex" onclick="closeMenu()">
-        <main class="flex-grow max-w-4xl mx-auto p-8">
-            <section id="sobre-mi" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-                <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Sobre Mi</h3>
-                <p class="mb-4 text-lg leading-relaxed">
-                    Sóc un estudiant dedicat que actualment estudia Desenvolupament d'Aplicacions Multiplataforma (DAM) a Espanya.
-                    El meu viatge en la tecnologia m'ha equipat amb un conjunt de competències diverses, incloent el desenvolupament web i el disseny d'aplicacions.
-                </p>
-                <p class="mb-4 text-lg leading-relaxed">
-                    Tinc una gran passió per crear experiències d'usuari intuïtives i atractives. El meu gran interès pel futbol i videojocs
-                    sovint inspira els meus projectes i treballs.
-                </p>
-                <p class="text-lg leading-relaxed">
-                    No dubtis a posar-te en contacte si vols connectar o saber més sobre els meus projectes!
-                </p>
-            </section>
 
-            <section id="informacio-personal" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-                <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Informació Personal</h3>
-                <ul class="list-disc list-inside text-lg leading-relaxed">
-                    <li><strong>Nom complet:</strong> Harry White</li>
-                    <li><strong>Data de naixement:</strong> 6-9-2002</li>
-                    <li><strong>Lloc de naixement:</strong> Chingford, Londres, Anglaterra</li>
-                    <li><strong>Criat a:</strong> Mora la Nova, Tarragona, Espanya</li>
-                    <li><strong>Ubicació actual:</strong> Tortosa, Espanya</li>
-                    <li><strong>Estudis:</strong> ESO SMX</li>
-                    <li><strong>Hobbies:</strong> Videjocs, mitjans socials, futbol i música</li>
-                </ul>
-            </section>
 
-            <section id="idiomes" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-                <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Idiomes</h3>
-                <p class="text-lg leading-relaxed">
-                    Parlo anglès perfectament i tinc un molt bon nivell de castellà i català.
-                </p>
-            </section>
+<div class="flex" onclick="closeMenu()">
+    <main class="flex-grow max-w-4xl mx-auto p-8">
+        <section id="sobre-mi" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
+            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Sobre Mi</h3>
+            <p class="mb-4 text-lg leading-relaxed">
+                Sóc un estudiant dedicat que actualment estudia Desenvolupament d'Aplicacions Multiplataforma (DAM) a Espanya.
+                El meu viatge en la tecnologia m'ha equipat amb un conjunt de competències diverses, incloent el desenvolupament web i el disseny d'aplicacions.
+            </p>
+            <p class="mb-4 text-lg leading-relaxed">
+                Tinc una gran passió per crear experiències d'usuari intuïtives i atractives. El meu gran interès pel futbol i videojocs
+                sovint inspira els meus projectes i treballs.
+            </p>
+            <p class="text-lg leading-relaxed">
+                No dubtis a posar-te en contacte si vols connectar o saber més sobre els meus projectes!
+            </p>
+        </section>
 
-            <section id="llenguatges" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-                <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Llenguatges de Programació</h3>
-                <div class="flex flex-wrap">
-                    <div class="flex items-center mb-4 mr-4">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML5" class="language-logo" />
-                        <span class="text-lg">HTML5 - Utilitzat per estructurar el contingut web.</span>
-                    </div>
-                    <div class="flex items-center mb-4 mr-4">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS3" class="language-logo" />
-                        <span class="text-lg">CSS3 - Utilitzat per dissenyar i estilitzar pàgines web.</span>
-                    </div>
-                    <div class="flex items-center mb-4 mr-4">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" class="language-logo" />
-                        <span class="text-lg">JavaScript - Llenguatge de programació per a la interactivitat web.</span>
-                    </div>
-                    <div class="flex items-center mb-4 mr-4">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="C" class="language-logo" />
-                        <span class="text-lg">C - Llenguatge de programació de baix nivell per a sistemes.</span>
-                    </div>
-                    <div class="flex items-center mb-4 mr-4">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="PHP" class="language-logo" />
-                        <span class="text-lg">PHP - Llenguatge de programació per al desenvolupament web del costat del servidor.</span>
-                    </div>
-                    <div class="flex items-center mb-4 mr-4">
-                        <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" alt="SQL" class="language-logo" />
-                        <span class="text-lg">SQL - Llenguatge de consulta per gestionar bases de dades relacionals.</span>
-                    </div>
+        <section id="informacio-personal" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
+            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Informació Personal</h3>
+            <ul class="list-disc list-inside text-lg leading-relaxed">
+                <li><strong>Nom complet:</strong> Harry White</li>
+                <li><strong>Data de naixement:</strong> 6-9-2002</li>
+                <li><strong>Lloc de naixement:</strong> Chingford, Londres, Anglaterra</li>
+                <li><strong>Criat a:</strong> Mora la Nova, Tarragona, Espanya</li>
+                <li><strong>Ubicació actual:</strong> Tortosa, Espanya</li>
+                <li><strong>Estudis:</strong> ESO SMX</li>
+                <li><strong>Hobbies:</strong> Videjocs, mitjans socials, futbol i música</li>
+            </ul>
+        </section>
+
+        <section id="idiomes" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
+            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Idiomes</h3>
+            <ul class="list-disc list-inside text-lg leading-relaxed">
+                <li>Català</li>
+                <li>Espanyol</li>
+                <li>Anglès</li>
+            </ul>
+        </section>
+
+        <section id="llenguatges" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
+            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Llenguatges de Programació</h3>
+            <div class="flex flex-wrap">
+                <div class="flex items-center mb-4 mr-4">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML5" class="language-logo" />
+                    <span class="text-lg">HTML5</span>
                 </div>
-            </section>
+                <div class="flex items-center mb-4 mr-4">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS3" class="language-logo" />
+                    <span class="text-lg">CSS3</span>
+                </div>
+                <div class="flex items-center mb-4 mr-4">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" class="language-logo" />
+                    <span class="text-lg">JavaScript</span>
+                </div>
+                <div class="flex items-center mb-4 mr-4">
+                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="C" class="language-logo" />
+                    <span class="text-lg">C</span>
+                </div>
+            </div>
+        </section>
 
-            <section id="projectes" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-                <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Els Meus Projectes</h3>
-                <p class="text-lg leading-relaxed mb-4">
-                    Aquí tens alguns dels meus projectes:
-                </p>
-                <ul class="list-disc list-inside">
-                    <li>
-                        <a href="https://github.com/IESEBRE/mp3-uf5-projecte-harrywhite17" class="text-blue-400 hover:underline">Projecte de MP03 UF5</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/IESEBRE/mp3-uf6-projecte-harrywhite17" class="text-blue-400 hover:underline">Projecte de MP03 UF6</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/harrywhite17/MP1UF3FOG" class="text-blue-400 hover:underline">Projecte sobre el Fog</a>
-                    </li>
-                </ul>
-            </section>
+        <section id="projectes" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
+            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Els Meus Projectes</h3>
+            <ul class="list-disc list-inside text-lg leading-relaxed">
+                <li><a href="https://github.com/harrywhite17/MP1UF3FOG" class="text-blue-400 hover:underline">Fog project (UF6 de MP03)</a></li>
+                <li><a href="https://github.com/IESEBRE/mp3-uf6-projecte-harrywhite17" class="text-blue-400 hover:underline">MP03 UF6 projecte</a></li>
+                <li><a href="https://github.com/IESEBRE/mp3-uf5-projecte-harrywhite17" class="text-blue-400 hover:underline">MP03 UF5 projecte</a></li>
+            </ul>
+        </section>
 
-            <section id="contacte" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-                <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Contacta'm</h3>
-                <p class="text-lg leading-relaxed mb-2">
-                    GitHub: <a href="https://github.com/harrywhite17" class="text-blue-400 hover:underline">harrywhite17</a>
-                </p>
-                <p class="text-lg leading-relaxed mb-2">
-                    Gmail: <a href="mailto:harrywhite@iesebre.com" class="text-blue-400 hover:underline">harrywhite@iesebre.com</a>
-                </p>
-            </section>
+        <section id="contacte" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
+            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Contacta'm</h3>
+            <p class="text-lg leading-relaxed">
+                Pots trobar-me a les xarxes socials:
+            </p>
+            <div class="flex mb-4">
+                <a href="https://www.instagram.com/haarry.whiite17/" class="mr-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="social-icon" />
+                </a>
+                <a href="https://www.facebook.com/haarry.whiite17/" class="mr-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="social-icon" />
+                </a>
+                <a href="https://github.com/harrywhite17">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="social-icon" />
+                </a>
+            </div>
+        </section>
+    </main>
+</div>
 
-            <section class="bg-gray-900 shadow-md rounded-lg p-8">
-                <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Drets d'Autor</h3>
-                <p class="text-lg leading-relaxed">
-                    © 2024 Harry White. Tots els drets reservats.
-                </p>
-                <p class="text-lg leading-relaxed">
-                    Imatges utilitzades sota llicència o amb permís dels respectius propietaris.
-                </p>
-            </section>
-        </main>
-    </div>
+<button onclick="scrollToTop()" class="scroll-to-top">
+    <img src="iconmonstr-arrow-up-thin.png" alt="Top" />
+</button>
 
-    <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
-    <script type="module" src="/main.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 </body>
 </html>
