@@ -6,8 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sobre Mi - Harry White</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
         /* Estils personalitzats */
+        body {
+            background: linear-gradient(270deg, #4a90e2, #a0d3ff);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            transition: background-color 0.3s, color 0.3s; /* Transicions suaus */
+        }
         .language-logo {
             width: 50px; /* Mida del logo */
             margin-right: 10px;
@@ -23,7 +30,6 @@
         .light-mode {
             background-color: #ffffff; /* Color de fons del mode clar */
             color: #1a202c; /* Color del text del mode clar */
-            transition: background-color 0.3s, color 0.3s; /* Transicions suaus */
         }
         .light-mode header {
             background-color: #a0d3ff; /* Lighter blue for the header in light mode */
@@ -56,17 +62,37 @@
             justify-content: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             cursor: pointer;
-            transition: background-color 0.3s;
             display: none; /* Amaga el botó inicialment */
+            transition: background-color 0.3s, transform 0.3s; /* Add transform transition */
         }
         .scroll-to-top:hover {
             background-color: #357ab8; /* Més fosc al passar el ratolí */
+            transform: scale(1.1); /* Scale effect on hover */
         }
         .menu {
             display: none; /* Amaga el menú per defecte */
         }
         .menu.show {
             display: block; /* Mostra el menú quan està actiu */
+        }
+        /* Estils per al formulari de contacte */
+        .contact-form {
+            background-color: #1a202c; /* Fons per la secció de contacte */
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+        }
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            .scroll-to-top {
+                width: 40px; /* Smaller button on mobile */
+                height: 40px;
+            }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
     </style>
     <script>
@@ -113,12 +139,26 @@
                 scrollToTopButton.style.display = "none"; // Amaga el botó
             }
         };
+
+        // Animate sections on scroll
+        const sections = document.querySelectorAll("section");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
     </script>
 </head>
-<body class="bg-gray-800 text-gray-200 dark-mode transition-colors duration-300">
+<body class="bg-gray-800 text-gray-200 dark-mode">
 <div class="flex justify-between p-4">
     <h1 class="text-xl">Harry White</h1>
-    <button onclick="toggleMenu()" class="bg-black text-white rounded px-4 py-2 ml-auto toggle-button">Menú</button>
+    <button onclick="toggleMenu()" aria-label="Menú" class="bg-black text-white rounded px-4 py-2 ml-auto toggle-button">Menú</button>
 </div>
 
 <!-- Dropdown Menu -->
@@ -134,112 +174,96 @@
     </ul>
 </div>
 
-<header class="bg-gradient-to-r from-blue-600 to-blue-400 text-white text-center py-16 shadow-lg relative overflow-hidden">
-    <h1 class="text-6xl font-extrabold animate__animated animate__fadeIn animate__delay-1s transform hover:scale-105 transition duration-300">
+<header class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-400 opacity-80"></div>
+    <h1 class="text-6xl font-extrabold text-white text-center relative z-10 py-16 animate__animated animate__fadeIn animate__delay-1s transform hover:scale-105 transition duration-300">
         Benvingut al meu landing page!
     </h1>
-    <h2 class="text-4xl mt-4 animate__animated animate__fadeIn animate__delay-2s transform hover:scale-105 transition duration-300">
+    <h2 class="text-4xl mt-4 text-white text-center relative z-10 animate__animated animate__fadeIn animate__delay-2s transform hover:scale-105 transition duration-300">
         Sóc Harry White
     </h2>
+    <p class="text-lg mt-4 text-center text-white relative z-10 animate__animated animate__fadeIn animate__delay-3s">
+        Un apassionat de la tecnologia i la programació. Exploreu els meus projectes i contacteu-me per a col·laboracions!
+    </p>
+    <div class="text-center relative z-10 mt-6">
+        <a href="#projectes" class="bg-blue-700 text-white rounded px-6 py-3 font-semibold hover:bg-blue-800 transition duration-300">Descobreix els meus projectes</a>
+    </div>
     <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-blue-400 to-transparent"></div>
 </header>
 
 
-
 <div class="flex" onclick="closeMenu()">
     <main class="flex-grow max-w-4xl mx-auto p-8">
-        <section id="sobre-mi" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Sobre Mi</h3>
-            <p class="mb-4 text-lg leading-relaxed">
-                Sóc un estudiant dedicat que actualment estudia Desenvolupament d'Aplicacions Multiplataforma (DAM) a Espanya.
-                El meu viatge en la tecnologia m'ha equipat amb un conjunt de competències diverses, incloent el desenvolupament web i el disseny d'aplicacions.
-            </p>
-            <p class="mb-4 text-lg leading-relaxed">
-                Tinc una gran passió per crear experiències d'usuari intuïtives i atractives. El meu gran interès pel futbol i videojocs
-                sovint inspira els meus projectes i treballs.
-            </p>
-            <p class="text-lg leading-relaxed">
-                No dubtis a posar-te en contacte si vols connectar o saber més sobre els meus projectes!
-            </p>
+        <section id="sobre-mi" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300 animate__animated">
+            <h3 class="text-2xl font-semibold">Sobre Mi</h3>
+            <p class="mt-2">Sóc un estudiant de DAM amb passió per la tecnologia i la programació.</p>
         </section>
 
-        <section id="informacio-personal" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Informació Personal</h3>
-            <ul class="list-disc list-inside text-lg leading-relaxed">
-                <li><strong>Nom complet:</strong> Harry White</li>
-                <li><strong>Data de naixement:</strong> 6-9-2002</li>
-                <li><strong>Lloc de naixement:</strong> Chingford, Londres, Anglaterra</li>
-                <li><strong>Criat a:</strong> Mora la Nova, Tarragona, Espanya</li>
-                <li><strong>Ubicació actual:</strong> Tortosa, Espanya</li>
-                <li><strong>Estudis:</strong> ESO SMX</li>
-                <li><strong>Hobbies:</strong> Videjocs, mitjans socials, futbol i música</li>
+        <section id="informacio-personal" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300 animate__animated">
+            <h3 class="text-2xl font-semibold">Informació Personal</h3>
+            <ul class="list-disc list-inside mt-2">
+                <li>Nom: Harry White</li>
+                <li>Ubicació: Espanya</li>
+                <li>Interès: Programació i Desenvolupament Web</li>
+                <li>Hobbies: Mirar pelicules i series, videojocs i esports</li>
+                <li>Estudis: Estudiant de Desenvolupament d'Aplicacions Multiplataforma (DAM)</li>
             </ul>
         </section>
 
-        <section id="idiomes" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Idiomes</h3>
-            <ul class="list-disc list-inside text-lg leading-relaxed">
-                <li>Català</li>
-                <li>Espanyol</li>
-                <li>Anglès</li>
+
+        <section id="idiomes" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300 animate__animated">
+            <h3 class="text-2xl font-semibold">Idiomes</h3>
+            <ul class="list-disc list-inside mt-2">
+                <li>Anglès: Nivell Alt</li>
+                <li>Espanyol: Nivell Alt</li>
+                <li>Català: Nivell Alt</li>
             </ul>
         </section>
 
-        <section id="llenguatges" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Llenguatges de Programació</h3>
-            <div class="flex flex-wrap">
-                <div class="flex items-center mb-4 mr-4">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" alt="HTML5" class="language-logo" />
-                    <span class="text-lg">HTML5</span>
-                </div>
-                <div class="flex items-center mb-4 mr-4">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" alt="CSS3" class="language-logo" />
-                    <span class="text-lg">CSS3</span>
-                </div>
-                <div class="flex items-center mb-4 mr-4">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="JavaScript" class="language-logo" />
-                    <span class="text-lg">JavaScript</span>
-                </div>
-                <div class="flex items-center mb-4 mr-4">
-                    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="C" class="language-logo" />
-                    <span class="text-lg">C</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="projectes" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Els Meus Projectes</h3>
-            <ul class="list-disc list-inside text-lg leading-relaxed">
-                <li><a href="https://github.com/harrywhite17/MP1UF3FOG" class="text-blue-400 hover:underline">Fog project (UF6 de MP03)</a></li>
-                <li><a href="https://github.com/IESEBRE/mp3-uf6-projecte-harrywhite17" class="text-blue-400 hover:underline">MP03 UF6 projecte</a></li>
-                <li><a href="https://github.com/IESEBRE/mp3-uf5-projecte-harrywhite17" class="text-blue-400 hover:underline">MP03 UF5 projecte</a></li>
+        <section id="llenguatges" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300 animate__animated">
+            <h3 class="text-2xl font-semibold">Llenguatges de Programació</h3>
+            <ul class="list-disc list-inside mt-2">
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript</li>
+                <li>C</li>
             </ul>
         </section>
 
-        <section id="contacte" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300">
-            <h3 class="text-4xl font-semibold border-b-2 border-blue-600 pb-2 mb-4">Contacta'm</h3>
-            <p class="text-lg leading-relaxed">
-                Pots trobar-me a les xarxes socials:
-            </p>
-            <div class="flex mb-4">
-                <a href="https://www.instagram.com/haarry.whiite17/" class="mr-4">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="social-icon" />
-                </a>
-                <a href="https://www.facebook.com/haarry.whiite17/" class="mr-4">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" class="social-icon" />
-                </a>
-                <a href="https://github.com/harrywhite17">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="social-icon" />
-                </a>
-            </div>
+        <section id="projectes" class="bg-gray-900 shadow-md rounded-lg p-8 mb-8 transition duration-300 animate__animated">
+            <h3 class="text-2xl font-semibold">Els Meus Projectes</h3>
+            <ul class="list-disc list-inside mt-2">
+                <li><a href="https://github.com/harrywhite17/MP1UF3FOG" class="text-blue-400 hover:underline">Fog Project</a></li>
+                <li><a href="https://github.com/IESEBRE/mp3-uf6-projecte-harrywhite17" class="text-blue-400 hover:underline">MP03 UF6 Project</a></li>
+                <li><a href="https://github.com/IESEBRE/mp3-uf5-projecte-harrywhite17" class="text-blue-400 hover:underline">MP03 UF5 Project</a></li>
+            </ul>
+        </section>
+
+        <section id="contacte" class="contact-form shadow-md rounded-lg p-8 mb-8 transition duration-300 animate__animated">
+            <h3 class="text-2xl font-semibold">Contacta'm</h3>
+            <form action="#" method="post" class="mt-4">
+                <label for="name" class="block text-sm">Nom:</label>
+                <input type="text" id="name" name="name" required aria-label="Nom" class="w-full p-2 mb-4 border border-gray-300 rounded" />
+
+                <label for="email" class="block text-sm">Correu Electrònic:</label>
+                <input type="email" id="email" name="email" required aria-label="Correu Electrònic" class="w-full p-2 mb-4 border border-gray-300 rounded" />
+
+                <label for="message" class="block text-sm">Missatge:</label>
+                <textarea id="message" name="message" required aria-label="Missatge" class="w-full p-2 mb-4 border border-gray-300 rounded"></textarea>
+
+                <button type="submit" class="bg-blue-600 text-white rounded px-4 py-2 hover:bg-blue-700">Enviar</button>
+            </form>
         </section>
     </main>
 </div>
 
-<button onclick="scrollToTop()" class="scroll-to-top">
-    <img src="iconmonstr-arrow-up-thin.png" alt="Top" />
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top" onclick="scrollToTop()" aria-label="Torna a la part superior">
+    &#8593;
 </button>
 
-
+<footer class="bg-gray-900 text-gray-400 text-center p-4">
+    <p>&copy; 2024 Harry White. Tots els drets reservats.</p>
+</footer>
 </body>
 </html>
