@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sobre Mi - Harry White</title>
+    <title>Els Meus Projectes - Harry White</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
@@ -92,7 +92,30 @@
             }
         }
     </style>
-    <script src="main.js" defer></script>
+    <script>
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        window.onscroll = function() {
+            const scrollToTopButton = document.querySelector('.scroll-to-top');
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                scrollToTopButton.style.display = "flex";
+            } else {
+                scrollToTopButton.style.display = "none";
+            }
+        };
+        const sections = document.querySelectorAll(".section");
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        });
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </head>
 <body>
 <header>
@@ -108,24 +131,27 @@
 
 <main class="flex-grow max-w-4xl mx-auto p-8">
     <div class="hero animate__animated animate__fadeInUp">
-        <h2 class="text-4xl font-bold mb-4">Sobre Mi</h2>
-        <p class="mb-4">Hola! Soc Harry, un apassionat del desenvolupament d'aplicacions multiplataforma.</p>
+        <h2 class="text-4xl font-bold mb-4">Els Meus Projectes</h2>
+        <p class="mb-4">Aquí trobaràs una selecció dels meus projectes més destacats en el desenvolupament d'aplicacions multiplataforma.</p>
     </div>
 
     <section class="section my-10">
-        <h2 class="text-3xl font-bold mb-4">Llenguatges de Programació</h2>
-        <p class="mb-4">Conec diversos llenguatges de programació que m'ajuden a crear aplicacions web i mòbils. Aquí teniu una breu descripció dels llenguatges que domino:</p>
+        <h2 class="text-3xl font-bold mb-4">Projectes Destacats</h2>
         <ul class="list-disc list-inside">
-            <li><strong>HTML5:</strong> El llenguatge de marcat més utilitzat per estructurar pàgines web. M'ajuda a crear la base de qualsevol projecte web.</li>
-            <li><strong>CSS3:</strong> Utilitzat per estilitzar les pàgines web, permeten crear dissenys atractius i adaptatius.</li>
-            <li><strong>JavaScript:</strong> Un llenguatge de programació essencial per afegir interactivitat i dinamicitat a les aplicacions web.</li>
-            <li><strong>C:</strong> Un llenguatge de programació de baix nivell que m'ajuda a entendre millor com funcionen els ordinadors i el programari.</li>
+            <li><a href="https://github.com/harrywhite17/MP1UF3FOG" class="text-blue-400">Fog project (UF6 of MP03)</a>: Un projecte de gestió de la informació a través d'una aplicació web.</li>
+            <li><a href="https://github.com/IESEBRE/mp3-uf6-projecte-harrywhite17" class="text-blue-400">MP03 UF6 project</a>: Aplicació per a la gestió de projectes, amb funcionalitats avançades.</li>
+            <li><a href="https://github.com/IESEBRE/mp3-uf5-projecte-harrywhite17" class="text-blue-400">MP03 UF5 project</a>: Desenvolupament d'una aplicació web per a la visualització de dades.</li>
         </ul>
     </section>
 
     <section class="section my-10">
-        <h2 class="text-3xl font-bold mb-4">Altres Interessos</h2>
-        <p class="mb-4">A més del desenvolupament, m'apassiona la tecnologia, el disseny d'interfícies i la resolució de problemes. Estic sempre aprenent noves habilitats i explorant les últimes tendències en tecnologia.</p>
+        <h2 class="text-3xl font-bold mb-4">Altres Projectes</h2>
+        <p class="mb-4">A més dels projectes destacats, he treballat en altres projectes que inclouen:</p>
+        <ul class="list-disc list-inside">
+            <li>Aplicacions mòbils per a la gestió de tasques diàries.</li>
+            <li>Jocs senzills en JavaScript.</li>
+            <li>Webs personals i de portafolis.</li>
+        </ul>
     </section>
 </main>
 
