@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Landing Page Harry White </title>
+    <title>Landing Page Harry White</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
@@ -43,14 +43,14 @@
         }
 
         .hero {
-            background-color: #feffff;
+            background-color: #1b1d1e;
             padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 20px rgb(71, 109, 224);
             text-align: center;
             margin: 20px auto;
             max-width: 800px;
-            color: #000000;
+            color: #fbfbfb;
         }
 
         .section {
@@ -58,9 +58,9 @@
             margin: 20px auto;
             padding: 20px;
             border-radius: 8px;
-            background: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            color: #000000;
+            background: #1b1d1e;
+            box-shadow: 0 2px 10px rgb(71, 109, 224);
+            color: #fbfbfb;
         }
 
         footer {
@@ -123,8 +123,6 @@
             background-size: cover;
             background-attachment: fixed;
         }
-
-
     </style>
 </head>
 
@@ -168,6 +166,12 @@
     <section class="section my-10">
         <h2 class="text-3xl font-bold mb-4">Domini en Màquines Virtuals</h2>
         <p class="mb-4">Tinc experiència utilitzant VirtualBox per crear i gestionar màquines virtuals. Domini la instal·lació i configuració de sistemes operatius com Windows, Linux, i Raspberry Pi en entorns virtuals. Aquestes habilitats em permeten simular entorns reals de treball i provar aplicacions en diferents plataformes de manera eficient.</p>
+        <div class="icons">
+            <img src="Virtualbox.png" alt="VirtualBox" title="VirtualBox">
+            <img src="windows.png" alt="Windows" title="Windows">
+            <img src="ubuntu-logo-removebg-preview.png" alt="Ubuntu" title="Ubuntu">
+            <img src="raspi.png" alt="Raspberry Pi" title="Raspberry Pi">
+        </div>
     </section>
 </main>
 
@@ -180,33 +184,24 @@
 <button class="scroll-to-top" onclick="scrollToTop()">↑</button>
 
 <script>
-    // Funció per tornar a dalt
+    // Scroll to top button
+    const scrollToTopButton = document.querySelector('.scroll-to-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollToTopButton.style.display = 'flex';
+        } else {
+            scrollToTopButton.style.display = 'none';
+        }
+    });
+
     function scrollToTop() {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     }
-
-    // Mostrar el botó de tornar a dalt quan es fa scroll
-    window.onscroll = function () {
-        const scrollToTopBtn = document.querySelector('.scroll-to-top');
-        if (document.documentElement.scrollTop > 200) {
-            scrollToTopBtn.style.display = 'flex';
-        } else {
-            scrollToTopBtn.style.display = 'none';
-        }
-
-        // Canviar fons en funció de la posició de desplaçament
-        const scrollPosition = document.documentElement.scrollTop;
-        if (scrollPosition < 800) {
-            document.body.setAttribute('data-bg', '1');
-        } else {
-            document.body.setAttribute('data-bg', '2');
-        }
-    }
 </script>
-
 </body>
 
 </html>
