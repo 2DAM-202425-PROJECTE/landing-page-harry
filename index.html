@@ -13,6 +13,7 @@
             background-color: #1e1e1e;
             font-family: 'Arial', sans-serif;
             color: #000000;
+            overflow-x: hidden;
         }
 
         header {
@@ -115,10 +116,19 @@
             width: 50px;
             height: 50px;
         }
+
+        /* Background images */
+        body[data-bg="1"] {
+            background-image: url('https://img.freepik.com/free-vector/matrix-style-binary-code-digital-falling-numbers-blue-background_1017-37387.jpg?t=st=1728322011~exp=1728325611~hmac=9afd3415042c752b7286a0b19c7e7ba48ffcc46f3a6ff47f70381c134cfeb671&w=996');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+
     </style>
 </head>
 
-<body>
+<body data-bg="1">
 <header>
     <div class="max-w-4xl mx-auto flex flex-col items-center">
         <h1 class="text-3xl font-bold">Harry White</h1>
@@ -134,10 +144,7 @@
     <div class="hero animate__animated animate__fadeInUp">
         <h2 class="text-4xl font-bold mb-4">Sobre Mi</h2>
         <p class="mb-4">Hola! Soc Harry, un apassionat del desenvolupament d'aplicacions multiplataforma amb experiència en HTML, CSS, JavaScript, i altres tecnologies. M'agrada resoldre problemes complexos, treballar en equip, i crear solucions innovadores per a aplicacions mòbils i web. Estic sempre disposat a aprendre i millorar les meves habilitats en el camp de la programació i les tecnologies de la informació.</p>
-
-
     </div>
-
 
     <section class="section my-10">
         <h2 class="text-3xl font-bold mb-4">Llenguatges i Tools</h2>
@@ -188,6 +195,14 @@
             scrollToTopBtn.style.display = 'flex';
         } else {
             scrollToTopBtn.style.display = 'none';
+        }
+
+        // Canviar fons en funció de la posició de desplaçament
+        const scrollPosition = document.documentElement.scrollTop;
+        if (scrollPosition < 800) {
+            document.body.setAttribute('data-bg', '1');
+        } else {
+            document.body.setAttribute('data-bg', '2');
         }
     }
 </script>

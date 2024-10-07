@@ -9,9 +9,11 @@
     <style>
         /* Estils personalitzats */
         body {
-            background-color: #1e1e1e;
+            background-image: url('https://img.freepik.com/free-vector/matrix-style-binary-code-digital-falling-numbers-blue-background_1017-37387.jpg?t=st=1728322011~exp=1728325611~hmac=9afd3415042c752b7286a0b19c7e7ba48ffcc46f3a6ff47f70381c134cfeb671&w=996');
+            background-size: cover;
+            background-position: center;
             font-family: 'Arial', sans-serif;
-            color: #000000;
+            color: #ffffff; /* Text color changed to white for better contrast */
         }
         header {
             background-color: rgba(30, 30, 30, 0.9);
@@ -35,7 +37,7 @@
             color: #8295e6;
         }
         .hero {
-            background-color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -49,7 +51,7 @@
             margin: 20px auto;
             padding: 20px;
             border-radius: 8px;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             color: #000000;
         }
@@ -131,25 +133,25 @@
 <main class="flex-grow max-w-4xl mx-auto p-8">
     <div class="hero animate__animated animate__fadeInUp">
         <h2 class="text-4xl font-bold mb-4">Contacta'm</h2>
-        <p class="mb-4">Si tens alguna pregunta o simplement vols saludar-me, omple el formulari a continuació!</p>
+        <p class="mb-4">Si tens alguna pregunta o vols posar-te en contacte amb mi, pots fer-ho a través del següent formulari:</p>
     </div>
 
     <section class="section my-10">
-        <h2 class="text-3xl font-bold mb-4">Formulari de Contacte</h2>
-        <form action="#" method="POST" class="flex flex-col space-y-4">
-            <input type="text" name="nom" placeholder="El teu nom" class="p-2 border border-gray-400 rounded" required>
-            <input type="email" name="email" placeholder="El teu correu electrònic" class="p-2 border border-gray-400 rounded" required>
-            <textarea name="missatge" rows="5" placeholder="El teu missatge" class="p-2 border border-gray-400 rounded" required></textarea>
-            <button type="submit" class="bg-blue-500 text-white p-2 rounded">Enviar</button>
+        <form action="mailto:harrywhite@iesebre.com" method="post" enctype="text/plain">
+            <div class="mb-4">
+                <label for="name" class="block font-bold mb-2">Nom:</label>
+                <input type="text" id="name" name="name" required class="border border-gray-300 p-2 w-full" />
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block font-bold mb-2">Correu electrònic:</label>
+                <input type="email" id="email" name="email" required class="border border-gray-300 p-2 w-full" />
+            </div>
+            <div class="mb-4">
+                <label for="message" class="block font-bold mb-2">Missatge:</label>
+                <textarea id="message" name="message" required class="border border-gray-300 p-2 w-full" rows="4"></textarea>
+            </div>
+            <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition">Enviar</button>
         </form>
-    </section>
-
-    <section class="section my-10">
-        <h2 class="text-3xl font-bold mb-4">Altres Maneres de Contactar</h2>
-        <p class="mb-4">També em pots trobar a les següents xarxes socials:</p>
-        <ul class="list-disc list-inside">
-            <li><a href="https://github.com/harrywhite17" class="text-blue-400">Github</a></li>
-        </ul>
     </section>
 </main>
 
